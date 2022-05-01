@@ -1,5 +1,7 @@
 # CMake Tutorial
 
+Clone [The CMake official Tutorial](https://github.com/Kitware/CMake/tree/master/Help/guide/tutorial).
+
 ## Introduction
 
 The CMake tutorial provides a step-by-step guide that covers common build

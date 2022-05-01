@@ -151,9 +151,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 Let's build our project again:
 
 ```shell
-  mkdir Step2_build && cd Step2_build
-  cmake ../Step2
-  cmake --build .
+mkdir Step2_build && cd Step2_build
+cmake ../Step2
+cmake --build .
 ```
 
 Now we can try to use the newly built `Tutorial` with same commands as before:
