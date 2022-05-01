@@ -4,3 +4,5 @@
 # VS Code work directory
 .vscode/
 
+# build directory
+*_build/
