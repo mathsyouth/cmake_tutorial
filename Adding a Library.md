@@ -6,25 +6,25 @@ then use this library instead of the standard square root function provided by
 the compiler.
 
 For this tutorial we will put the library into a subdirectory
-called `MathFunctions`. This directory already contains a header file,
+called [`MathFunctions`](./Step3/MathFunctions). This directory already contains a header file,
 `MathFunctions.h`, and a source file `mysqrt.cxx`. The source file has one
 function called `mysqrt` that provides similar functionality to the
 compiler's `sqrt` function.
 
-Add the following one line `CMakeLists.txt` file to the `Step3/MathFunctions`
+Add the following one line `CMakeLists.txt` file to the [`Step3/MathFunctions`](./Step3/MathFunctions/)
 directory:
 
 ```cmake
 add_library(MathFunctions mysqrt.cxx)
 ```
 
-where [add_libray](https://cmake.org/cmake/help/latest/command/add_library.html) adds a library target called `<name>` to be built from the source files listed in the command invocation.
+where [`add_libray`](https://cmake.org/cmake/help/latest/command/add_library.html) adds a library target called `<name>` to be built from the source files listed in the command invocation.
 
 To make use of the new library we will add an `add_subdirectory`
-call in the top-level `Step3/CMakeLists.txt` file so that the library will get
+call in the top-level [`Step3/CMakeLists.txt`](./Step3/CMakeLists.txt) file so that the library will get
 built. We add the new library to the executable, and add `MathFunctions` as
 an include directory so that the `MathFunctions.h` header file can be found.
-The last few lines of the top-level `Step3/CMakeLists.txt` file should now look
+The last few lines of the top-level [`Step3/CMakeLists.txt`](./Step3/CMakeLists.txt) file should now look
 like:
 
 ```cmake
@@ -44,12 +44,12 @@ target_include_directories(Tutorial PUBLIC
                           )
 ```
 
-where [target_link_libraries](https://cmake.org/cmake/help/latest/command/target_link_libraries.html) specify libraries or flags to use when linking a given target and/or its dependents.
+where [`target_link_libraries`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html) specifies libraries or flags to use when linking a given target and/or its dependents.
 
 Now let us make the `MathFunctions` library optional. While for the tutorial
 there really isn't any need to do so, for larger projects this is a common
 occurrence. The first step is to add an option to the top-level
-`Step3/CMakeLists.txt` file.
+[`Step3/CMakeLists.txt`](./Step3/CMakeLists.txt) file.
 
 ```cmake
 option(USE_MYMATH "Use tutorial provided math implementation" ON)
@@ -70,8 +70,7 @@ value of the option.  Inside the `if` block, put the
 `add_subdirectory` command from above with some additional list
 commands to store information needed to link to the library and add the
 subdirectory as an include directory in the `Tutorial` target.
-The end of the top-level `Step3/CMakeLists.txt` file will now look like the
-following:
+The end of the top-level [`Step3/CMakeLists.txt`](./Step3/CMakeLists.txt) file will now look like the following:
 
 ```cmake
 if(USE_MYMATH)
@@ -101,7 +100,7 @@ classic approach when dealing with many optional components, we will cover
 the modern approach in the next step.
 
 The corresponding changes to the source code are fairly straightforward.
-First, in `Step3/tutorial.cxx`, include the `MathFunctions.h` header if we
+First, in [`Step3/tutorial.cxx`](./Step3/tutorial.cxx), include the `MathFunctions.h` header if we
 need it:
 
 ```C++ standard
@@ -122,7 +121,7 @@ function is used:
 ```
 
 Since the source code now requires `USE_MYMATH` we can add it to
-`Step3/TutorialConfig.h.in` with the following line:
+[`Step3/TutorialConfig.h.in`](./Step3/TutorialConfig.h.in) with the following line:
 
 ```cmake
 #cmakedefine USE_MYMATH

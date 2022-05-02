@@ -3,7 +3,7 @@
 The most basic project is an executable built from source code files.
 For simple projects, a three line `CMakeLists.txt` file is all that is
 required. This will be the starting point for our tutorial. Create a
-`CMakeLists.txt` file in the `Step1` directory that looks like:
+[`CMakeLists.txt`](./Step1/CMakeLists.txt) file in the [`Step1`](./Step1) directory that looks like:
 
 ```cmake
 cmake_minimum_required(VERSION 3.10)
@@ -17,7 +17,7 @@ add_executable(Tutorial tutorial.cxx)
 
 Note that this example uses lower case commands in the `CMakeLists.txt` file.
 Upper, lower, and mixed case commands are supported by CMake. The source
-code for `tutorial.cxx` is provided in the `Step1` directory and can be
+code for [`tutorial.cxx`](./Step1/tutorial.cxx) is provided in the [`Step1`](./Step1) directory and can be
 used to compute the square root of a number.
 
 ## Build and Run
@@ -61,7 +61,7 @@ The first feature we will add is to provide our executable and project with a
 version number. While we could do this exclusively in the source code, using
 `CMakeLists.txt``provides more flexibility.
 
-First, modify the `Step2/CMakeLists.txt` file to use the `project` command
+First, modify the [`Step2/CMakeLists.txt`](./Step2/CMakeLists.txt) file to use the `project` command
 to set the project name and version number.
 
 ```cmake
@@ -80,7 +80,7 @@ configure_file(TutorialConfig.h.in TutorialConfig.h)
 
 Since the configured file will be written into the binary tree, we
 must add that directory to the list of paths to search for include
-files. Add the following lines to the end of the `Step2/CMakeLists.txt` file:
+files. Add the following lines to the end of the [`Step2/CMakeLists.txt`](./Step2/CMakeLists.txt) file:
 
 ```cmake
 target_include_directories(Tutorial PUBLIC
@@ -88,7 +88,9 @@ target_include_directories(Tutorial PUBLIC
                            )
 ```
 
-Using your favorite editor, create `Step2/TutorialConfig.h.in`` in the source
+where [`target_include_directories`](https://cmake.org/cmake/help/latest/command/target_include_directories.html) specifies include directories to use when compiling a given target. The named `<target>` must have been created by a command such as `add_executable()` or `add_library()`.
+
+Using your favorite editor, create [`Step2/TutorialConfig.h.in`](./Step2/TutorialConfig.h.in) in the source
 directory with the following contents:
 
 ```cmake
@@ -101,11 +103,10 @@ When CMake configures this header file the values for
 `@Tutorial_VERSION_MAJOR@` and `@Tutorial_VERSION_MINOR@` will be
 replaced.
 
-Next modify `Step2/tutorial.cxx`` to include the configured header file,
-`Step2/TutorialConfig.h`.
+Next modify [`Step2/tutorial.cxx`](./Step2/tutorial.cxx) to include the configured header file, [`Step2/TutorialConfig.h`](./Step2/TutorialConfig.h)
 
 Finally, let's print out the executable name and version number by updating
-`Step2/tutorial.cxx` as follows:
+[`Step2/tutorial.cxx`](./Step2/tutorial.cxx) as follows:
 
 ```C++ standard
   if (argc < 2) {
@@ -120,8 +121,7 @@ Finally, let's print out the executable name and version number by updating
 ## Specify the C++ Standard
 
 Next let's add some C++11 features to our project by replacing `atof` with
-`std::stod` in `Step2/tutorial.cxx`.  At the same time, remove
-`#include <cstdlib>`.
+`std::stod` in [`Step2/tutorial.cxx`](./Step2/tutorial.cxx).  At the same time, remove `#include <cstdlib>`.
 
 ```C++ standard
   const double inputValue = std::stod(argv[1]);
@@ -164,5 +164,4 @@ Now we can try to use the newly built `Tutorial` with same commands as before:
 ./Tutorial
 ```
 
-Check that the version number is now reported when running the executable without
-any arguments.
+Check that the version number is now reported when running the executable without any arguments.
