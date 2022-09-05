@@ -59,7 +59,7 @@ Finally, try to use the newly built `Tutorial` with these commands:
 
 The first feature we will add is to provide our executable and project with a
 version number. While we could do this exclusively in the source code, using
-`CMakeLists.txt``provides more flexibility.
+`CMakeLists.txt` provides more flexibility.
 
 First, modify the [`Step2/CMakeLists.txt`](./Step2/CMakeLists.txt) file to use the `project` command
 to set the project name and version number.
