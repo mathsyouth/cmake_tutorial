@@ -6,6 +6,8 @@ add_executable(${PROJECT_NAME} main.cpp)
 
 add_subdirectory(Adder)
 
+add_subdirectory(external/glfw)
+
 # Could use include in a standard way
 target_include_directories(${PROJECT_NAME} PRIVATE Adder)
 # Path for build folder
