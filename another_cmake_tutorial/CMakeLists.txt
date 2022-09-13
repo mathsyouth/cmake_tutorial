@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 3.16.3)
+cmake_minimum_required(VERSION 3.22.1)
 
-project(cmake_tutorial)
+project(cmake_tutorial VERSION 1.0)
+
+configure_file(cmake_tutorialConfig.h.in cmake_tutorialConfig.h)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
@@ -8,11 +10,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
+# Include generated cmake_tutorialConfig.h file
+target_include_directories(${PROJECT_NAME}
+    PUBLIC ${PROJECT_BINARY_DIR}
+)
+
+
 add_subdirectory(Adder)
 
 # DOWNLOAD ALL THE SUBMODULES
 find_package(Git QUIET)
-if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+
+cmake_path(HAS_PARENT_PATH PROJECT_SOURCE_DIR PROJECT_HAS_PARENT)
+if(PROJECT_HAS_PARENT)
+    cmake_path(GET PROJECT_SOURCE_DIR PARENT_PATH PROJECT_PARENT_DIR)
+endif()
+if(GIT_FOUND AND EXISTS "${PROJECT_PARENT_DIR}/.git")
 # Update submodules as needed
     option(GIT_SUBMODULE "Check submodules during build" ON)
     if(GIT_SUBMODULE)

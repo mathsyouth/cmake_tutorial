@@ -1,0 +1,2 @@
+#define cmake_tutorial_VERSION_MAJOR @cmake_tutorial_VERSION_MAJOR@
+#define cmake_tutorial_VERSION_MINOR @cmake_tutorial_VERSION_MINOR@

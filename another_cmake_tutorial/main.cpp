@@ -1,12 +1,15 @@
 #include <iostream>
 #include <adder.h>
 #include <GLFW/glfw3.h>
+#include<cmake_tutorialConfig.h>
 
 
-int main()
+int main(int argc, char* argv[])
 {
   std::cout << "Hello World!" << std::endl;
   std::cout << add(3.14f, 4.93f) << std::endl;
+  std::cout << argv[0] << " Version: " << cmake_tutorial_VERSION_MAJOR << "."
+      << cmake_tutorial_VERSION_MINOR << std::endl;
 
   GLFWwindow *window;
   if( !glfwInit() )
