@@ -1,3 +1,3 @@
 #! /bin/sh
 
-make -C out/build/
+make install -C out/build/
