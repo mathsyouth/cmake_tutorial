@@ -2,21 +2,32 @@ cmake_minimum_required(VERSION 3.22.1)
 
 project(cmake_tutorial VERSION 1.0)
 
-configure_file(cmake_tutorialConfig.h.in cmake_tutorialConfig.h)
-
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
+option(USE_ADDER "A simple library for adding 2 floats" ON)
+if(USE_ADDER)
+   message(STATUS "Use Adder")
+   add_subdirectory(Adder)
+   target_include_directories(${PROJECT_NAME} 
+       PRIVATE Adder 
+   )
+   # Path for build folder
+   target_link_directories(${PROJECT_NAME} 
+       PRIVATE Adder
+   )
+endif()
+
+configure_file(cmake_tutorialConfig.h.in cmake_tutorialConfig.h)
+
+
 # Include generated cmake_tutorialConfig.h file
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${PROJECT_BINARY_DIR}
 )
-
-
-add_subdirectory(Adder)
 
 # DOWNLOAD ALL THE SUBMODULES
 find_package(Git QUIET)
@@ -48,11 +59,15 @@ add_subdirectory(external/glfw)
 
 # Could use include in a standard way
 target_include_directories(${PROJECT_NAME} 
-    PRIVATE Adder 
     PUBLIC external/glfw/include
 )
 # Path for build folder
 target_link_directories(${PROJECT_NAME} 
-    PRIVATE Adder
-    PRIVATE external/glfw/src)
-target_link_libraries(${PROJECT_NAME} add glfw)
+    PRIVATE external/glfw/src
+)
+
+if(USE_ADDER)
+    target_link_libraries(${PROJECT_NAME} add glfw)
+else()
+    target_link_libraries(${PROJECT_NAME} glfw)
+endif()
