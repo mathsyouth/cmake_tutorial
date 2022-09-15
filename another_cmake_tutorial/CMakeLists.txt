@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22.1)
 
-project(cmake_tutorial VERSION 1.0)
+project(cmake_tutorial VERSION 1.0.1)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
@@ -69,3 +69,10 @@ target_link_libraries(${PROJECT_NAME} ${EXTRA_LINKS} glfw)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES "${PROJECT_BINARY_DIR}/cmake_tutorialConfig.h" DESTINATION include)
+
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+include(CPack)
