@@ -1,8 +1,11 @@
 #include <iostream>
 //#include <adder.h>
-#include <GLFW/glfw3.h>
+#include<GLFW/glfw3.h>
 #include<cmake_tutorialConfig.h>
 
+#ifdef USE_ADDER
+    #include<adder.h>
+#endif
 
 int main(int argc, char* argv[])
 {

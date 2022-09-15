@@ -6,23 +6,20 @@ project(cmake_tutorial VERSION 1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(${PROJECT_NAME} main.cpp)
 
+# adder use logic
 option(USE_ADDER "A simple library for adding 2 floats" ON)
 if(USE_ADDER)
    message(STATUS "Use Adder")
    add_subdirectory(Adder)
-   target_include_directories(${PROJECT_NAME} 
-       PRIVATE Adder 
-   )
-   # Path for build folder
-   target_link_directories(${PROJECT_NAME} 
-       PRIVATE Adder
-   )
+   list(APPEND EXTRA_INCLUDE_DIRS "Adder")
+   list(APPEND EXTRA_LIB_DIRS "Adder") 
+   list(APPEND EXTRA_LINKS add)
 endif()
 
 configure_file(cmake_tutorialConfig.h.in cmake_tutorialConfig.h)
 
+add_executable(${PROJECT_NAME} main.cpp)
 
 # Include generated cmake_tutorialConfig.h file
 target_include_directories(${PROJECT_NAME}
@@ -60,14 +57,12 @@ add_subdirectory(external/glfw)
 # Could use include in a standard way
 target_include_directories(${PROJECT_NAME} 
     PUBLIC external/glfw/include
-)
+    ${EXTRA_INCLUDE_DIRS})
+
 # Path for build folder
 target_link_directories(${PROJECT_NAME} 
     PRIVATE external/glfw/src
+    ${EXTRA_LIB_DIRS}
 )
 
-if(USE_ADDER)
-    target_link_libraries(${PROJECT_NAME} add glfw)
-else()
-    target_link_libraries(${PROJECT_NAME} glfw)
-endif()
+target_link_libraries(${PROJECT_NAME} ${EXTRA_LINKS} glfw)

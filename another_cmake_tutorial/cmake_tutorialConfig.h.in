@@ -2,7 +2,3 @@
 #define cmake_tutorial_VERSION_MINOR @cmake_tutorial_VERSION_MINOR@
 
 #cmakedefine USE_ADDER
-
-#ifdef USE_ADDER
-    #include<adder.h>
-#endif
